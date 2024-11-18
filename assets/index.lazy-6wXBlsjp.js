@@ -1,0 +1,1 @@
+import{c as t,j as o}from"./index-DjpWmJ3m.js";import{u as n}from"./useRouteContext-D9FS-YM-.js";const m=t("/")({component:r});function r(){const e=n({from:"/"});return console.log(e),o.jsx("div",{children:o.jsx("h3",{children:"Welcome Home!"})})}export{m as Route};
