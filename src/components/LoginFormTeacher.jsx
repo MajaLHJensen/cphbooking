@@ -11,7 +11,9 @@ export default function LoginForm() {
   const context = useRouteContext({ from: "/loginTeacher" });
   const [name, setName] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState(""); 
+  const [passwordError, setPasswordError] = useState("");
+
+  // Comment to remove
  
   async function handleLogin(event) {
     event.preventDefault();
