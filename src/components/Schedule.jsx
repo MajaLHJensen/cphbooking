@@ -1,5 +1,7 @@
 import React from "react";
 
+// More comments
+
 // ChatGPT Magic
 const Schedule = ({value}) => {
   // Sample data for busy slots
