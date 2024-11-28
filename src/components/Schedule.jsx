@@ -40,9 +40,9 @@ const Schedule = ({value}) => {
   const times = Array.from({ length: 11 }, (_, i) => i + 8); // 8:00 to 18:00
 
   return (
-    <div style={styles.schedule-container}>
+    <div style={styles.container}>
       {/* Containeren til skemaet med afrundede hjørner og styling */}
-      <table style={styles.schedule-table}>
+      <table style={styles.table}>
         <thead>
           {/* Tabelrow, der indeholder tidslabels */}
           <tr>
@@ -67,9 +67,8 @@ const Schedule = ({value}) => {
               {times.map((time) => (
                 <td
                   key={time}
-                  style={styles.
-                    value[room].includes(time) ? "busy-slot" : ""
-                  }
+                  style={value[room].includes(time) ? styles.busySlot : undefined}
+                
                   /* Tilføjer klassen "busy-slot", hvis lokalet er optaget på dette tidspunkt */
                 ></td>
               ))}
