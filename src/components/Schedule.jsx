@@ -1,77 +1,69 @@
 import React from "react";
 
-// More comments
+const Schedule = ({ value }) => {
+  // Tidsintervaller: 8:00 til 18:00
+  const times = Array.from({ length: 11 }, (_, i) => i + 8);
 
-// ChatGPT Magic
-const Schedule = ({value}) => {
-  // Sample data for busy slots
-
+  // Inline-styling objekter
   const styles = {
     container: {
-      margin: '20px',
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: '#F5F3F3',
-      color: 'black',
+      margin: "5px",
+      fontFamily: "Arial, sans-serif",
+      backgroundColor: "#F5F3F3",
+      color: "black",
       fontWeight: 200,
-      fontSize: '14px',
-      width: '70%',
+      fontSize: "14px",
+      width: "90%",
+      maxWidth: "500%",
+      borderRadius: "10px", // Afrundede hjørner
+      overflow: "hidden", // Beskær overflow
     },
     table: {
-      borderCollapse: 'collapse',
-      width: '100%',
-      textAlign: 'center',
+      borderCollapse: "collapse",
+      width: "100%",
+      textAlign: "center",
     },
-    tableCell: {
-      border: '0.5px solid black',
-      padding: '15px',
+    th: {
+      backgroundColor: "#ffeb99",
+      position: "sticky",
+      top: 0,
+      padding: "15px",
+      border: "1px solid #ddd",
+    },
+    td: {
+      border: "1px solid #ddd",
+      padding: "5px",
       fontWeight: 200,
     },
-    tableHeader: {
-      backgroundColor: '#ffeb99',
-      position: 'sticky',
-      top: 0,
-      padding: '15px',
-    },
     busySlot: {
-      backgroundColor: '#ff6b6b',
+      backgroundColor: "#ff6b6b",
     },
-  }; 
-  
-
-  // Generate table rows dynamically
-  const times = Array.from({ length: 11 }, (_, i) => i + 8); // 8:00 to 18:00
+  };
 
   return (
     <div style={styles.container}>
-      {/* Containeren til skemaet med afrundede hjørner og styling */}
       <table style={styles.table}>
         <thead>
-          {/* Tabelrow, der indeholder tidslabels */}
           <tr>
-            {/* Tabel Header */}
-            <th></th> 
-            {/* Tom header til den første kolonne (lokalenavne) */}
+            <th style={styles.th}></th> {/* Tom header til lokale kolonnen */}
             {times.map((time) => (
-              <th key={time}>
-                {time.toString().padStart(2, "0")}
-                {/* Viser tidsrum (8 til 18), formateret med to cifre (fx 08, 09) */}
+              <th key={time} style={styles.th}>
+                {time.toString().padStart(2, "0")}:00
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {/* Tabelkrop, der indeholder rækker for hvert lokale */}
           {Object.keys(value).map((room) => (
             <tr key={room}>
-                {/* Tabeldata, firkanterne med indhold */}
-              <td>{room}</td>
-              {/* Første celle i hver række indeholder lokalets navn */}
+              <td style={styles.td}>{room}</td> {/* Lokalenavn */}
               {times.map((time) => (
                 <td
                   key={time}
-                  style={value[room].includes(time) ? styles.busySlot : undefined}
-                
-                  /* Tilføjer klassen "busy-slot", hvis lokalet er optaget på dette tidspunkt */
+                  style={{
+                    ...styles.td,
+                    ...(value[room].includes(time) ? styles.busySlot : {}),
+                  }}
                 ></td>
               ))}
             </tr>
