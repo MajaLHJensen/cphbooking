@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
 import classes from './DropdownPositionStyles.module.css';
 
@@ -15,7 +14,7 @@ const endTimeTable = [
   '18.00',
 ];
 
-export default function DropdownPositionStyles({endTime, setEndTime}) {
+export default function EndDropdown({endTime, setEndTime}) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -46,7 +45,7 @@ export default function DropdownPositionStyles({endTime, setEndTime}) {
           rightSection={<Combobox.Chevron />}
           onClick={() => combobox.toggleDropdown()}
           rightSectionPointerEvents="none"
-          classNames={{ input: classes.input }}
+          classNames={ classes.input }
         >
           {endTime || <Input.Placeholder>Vælg slutstidspunkt</Input.Placeholder>}
         </InputBase>

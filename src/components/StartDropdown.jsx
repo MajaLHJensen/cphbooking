@@ -15,7 +15,7 @@ const startTimeTable = [
   '17:00',
 ];
 
-export default function DropdownPositionStyles({startTime, setStartTime}) {
+export default function StartDropdown({startTime, setStartTime}) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -47,7 +47,7 @@ export default function DropdownPositionStyles({startTime, setStartTime}) {
           rightSection={<Combobox.Chevron />}
           onClick={() => combobox.toggleDropdown()}
           rightSectionPointerEvents="none"
-          classNames={{ input: classes.input }}
+          classNames={ classes.input }
         >
           {startTime || <Input.Placeholder>Vælg startstidspunkt</Input.Placeholder>}
         </InputBase>

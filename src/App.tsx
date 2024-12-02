@@ -8,6 +8,8 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import { getSupabaseClient } from "./supabase/getSupabaseClient";
 
+import './components/ButtonStyles.css';
+
 export const router = createRouter({
   routeTree,
   context: {
@@ -29,7 +31,7 @@ export default function App() {
     userInfo,
     setUserInfo,
   };
-
+console.log("Hej");
   return (
     <MantineProvider>
       <ModalsProvider>

@@ -1,9 +1,9 @@
-import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router'
+import { createFileRoute, useRouteContext } from '@tanstack/react-router'
 import FrontPageNavbar from '../components/FrontPageNavbar'
 import FrontPageFooter from '../components/FrontPageFooter'
 import FrontPageContent from '../components/FrontPageContent'
 
-export const Route = createLazyFileRoute('/')({
+export const Route = createFileRoute('/')({
   component: Index,
 })
 

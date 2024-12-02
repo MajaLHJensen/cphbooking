@@ -1,13 +1,11 @@
-import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router'
+import { createFileRoute, useRouteContext } from '@tanstack/react-router'
 import LoginFormStudent from '../components/LoginFormStudent'
 
-
-export const Route = createLazyFileRoute('/loginStudent')({
+export const Route = createFileRoute('/loginStudent')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-
   return (
     <div>
       {/* <div>{context.userInfo.name ?? 'No name'}</div> */}
@@ -15,4 +13,3 @@ function RouteComponent() {
     </div>
   )
 }
-

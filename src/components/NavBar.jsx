@@ -4,7 +4,6 @@ import { Avatar } from '@mantine/core';
 
 
 export default function NavBar(){
-
     const navBarStyle = {
         display: "flex",
         alignItems: "center",

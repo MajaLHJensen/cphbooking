@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
 import classes from './DropdownPositionStyles.module.css';
 
@@ -10,12 +9,10 @@ const lokaler = [
   'Lokale 3.14',
 ];
 
-export default function DropdownPositionStyles({selectedRoom, setSelectedRoom}) {
+export default function Dropdown({selectedRoom, setSelectedRoom}) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
-
-
 
   const options = lokaler.map((item) => (
     <Combobox.Option value={item} key={item}>
@@ -43,7 +40,7 @@ export default function DropdownPositionStyles({selectedRoom, setSelectedRoom}) 
           rightSection={<Combobox.Chevron />}
           onClick={() => combobox.toggleDropdown()}
           rightSectionPointerEvents="none"
-          classNames={{ input: classes.input }}
+          classNames={ classes.input }
         >
           {selectedRoom || <Input.Placeholder>Vælg lokale</Input.Placeholder>}
         </InputBase>

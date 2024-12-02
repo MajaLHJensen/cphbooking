@@ -9,6 +9,7 @@ import "@mantine/carousel/styles.css";
 import "@mantine/spotlight/styles.css";
 import App from "./App";
 
+
 // Render the app
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>

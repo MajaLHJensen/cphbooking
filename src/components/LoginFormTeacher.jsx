@@ -12,8 +12,6 @@ export default function LoginForm() {
   const [name, setName] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
-  // Comment to remove
  
   async function handleLogin(event) {
     event.preventDefault();
@@ -47,17 +45,15 @@ export default function LoginForm() {
       email,
     };
 
-    context.setUserInfo(userInfo);
-
+    // context.setUserInfo(userInfo);
 
     // 2. Siden ændrer sig
     // Redirecter til /index
-    context.navigate("/booking");
+    // context.navigate("/booking");
   }
 
   return (
     <div>
-
         {/* Log ind formen, som vi kalder container */}
         <Container className={styles.container}>
 
@@ -71,33 +67,33 @@ export default function LoginForm() {
             <h1>Log ind</h1>
             <form onSubmit={handleLogin} id="login-form">
                 <TextInput style={{color: "white"}}
-                label="Mail" 
-                description = "Skriv din arbejdsmail" 
-                placeholder="Mail" 
-                name="email" 
-                withAsterisk
-                size="lg" 
-                styles={{
-                    description: {
-                    color: 'white',
-                    },
-                }}
+                  label="Mail" 
+                  description = "Skriv din arbejdsmail" 
+                  placeholder="Mail" 
+                  name="email" 
+                  withAsterisk
+                  size="lg" 
+                  styles={{
+                      description: {
+                        color: 'white',
+                      },
+                  }}
                 />
                 {emailError && <span style={{color: "red"}} className="error">Forkert email</span>}
 
                 <PasswordInput style={{padding: "40px 0px", color: "white"}}
-                    label="Password"
-                    description="Skriv dit password"
-                    placeholder="Password"
-                    name="password"
-                    withAsterisk
-                    size="lg"
-                    styles={{
+                  label="Password"
+                  description="Skriv dit password"
+                  placeholder="Password"
+                  name="password"
+                  withAsterisk
+                  size="lg"
+                  styles={{
                     description: {
-                        color: 'white',
-                        },
-                    }}
-                    />
+                      color: 'white',
+                      },
+                  }}
+                />
                 {passwordError && <span style={{color: "red"}} className="error">Forkert password</span>}
 
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>

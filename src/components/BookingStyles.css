@@ -9,4 +9,80 @@
     flex-direction: column;
     gap: 2px;
   }
+
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    gap: 20px;
+  }
+  
+  .leftSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .dropdownContainer {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .bookButtonContainer {
+    padding-left: 200px;
+  }
+  
+  .modalOverlay {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modalContent {
+    background-color: #6eb47e;
+    border-radius: 16px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+  }
+  
+  .modalInnerSection {
+    background-color: #83c993;
+    border-radius: 16px;
+    padding: 50px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+  }
+  
+  .modalSummary {
+    margin-bottom: 20px;
+  }
+  
+  .modalSummaryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modalButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .rightSection {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+  }
   

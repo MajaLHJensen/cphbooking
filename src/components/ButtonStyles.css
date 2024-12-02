@@ -9,12 +9,6 @@
     text-decoration: none;
 }
 
-/* .placement{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}  */
-
 .whiteBtn:hover {
     background-color: #6eb47e;
     color: white;
@@ -29,7 +23,6 @@
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-
 }
 
 .greenBtn:hover {
@@ -42,7 +35,6 @@
     background-color: transparent;
     border: none;
     color: white; 
-    /* position: fixed; */
     left: -50px;
     font-weight: 300;
 }
@@ -57,7 +49,7 @@
 }
 
   /* Knap til at slette */
-  .deleteButton {
+.deleteButton {
     background-color: white;
     color: #6eb47e;
     border: none;
@@ -65,9 +57,9 @@
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .deleteButton:hover {
+.deleteButton:hover {
     background-color: #ff6b6b;
     color: white;
-  }
+}

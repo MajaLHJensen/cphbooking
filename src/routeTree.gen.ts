@@ -8,81 +8,66 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as StudentTeacherImport } from './routes/studentTeacher'
+import { Route as LoginTeacherImport } from './routes/loginTeacher'
+import { Route as LoginStudentImport } from './routes/loginStudent'
 import { Route as LayoutImport } from './routes/_layout'
-
-// Create Virtual Routes
-
-const StudentTeacherLazyImport = createFileRoute('/studentTeacher')()
-const LoginTeacherLazyImport = createFileRoute('/loginTeacher')()
-const LoginStudentLazyImport = createFileRoute('/loginStudent')()
-const IndexLazyImport = createFileRoute('/')()
-const LayoutMyBookingsLazyImport = createFileRoute('/_layout/myBookings')()
-const LayoutBookingConfirmLazyImport = createFileRoute(
-  '/_layout/bookingConfirm',
-)()
-const LayoutBookingLazyImport = createFileRoute('/_layout/booking')()
+import { Route as IndexImport } from './routes/index'
+import { Route as LayoutMyBookingsImport } from './routes/_layout.myBookings'
+import { Route as LayoutBookingConfirmImport } from './routes/_layout.bookingConfirm'
+import { Route as LayoutBookingImport } from './routes/_layout.booking'
 
 // Create/Update Routes
 
-const StudentTeacherLazyRoute = StudentTeacherLazyImport.update({
+const StudentTeacherRoute = StudentTeacherImport.update({
   id: '/studentTeacher',
   path: '/studentTeacher',
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/studentTeacher.lazy').then((d) => d.Route),
-)
+} as any)
 
-const LoginTeacherLazyRoute = LoginTeacherLazyImport.update({
+const LoginTeacherRoute = LoginTeacherImport.update({
   id: '/loginTeacher',
   path: '/loginTeacher',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/loginTeacher.lazy').then((d) => d.Route))
+} as any)
 
-const LoginStudentLazyRoute = LoginStudentLazyImport.update({
+const LoginStudentRoute = LoginStudentImport.update({
   id: '/loginStudent',
   path: '/loginStudent',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/loginStudent.lazy').then((d) => d.Route))
+} as any)
 
 const LayoutRoute = LayoutImport.update({
   id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexLazyRoute = IndexLazyImport.update({
+const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any)
 
-const LayoutMyBookingsLazyRoute = LayoutMyBookingsLazyImport.update({
+const LayoutMyBookingsRoute = LayoutMyBookingsImport.update({
   id: '/myBookings',
   path: '/myBookings',
   getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.myBookings.lazy').then((d) => d.Route),
-)
+} as any)
 
-const LayoutBookingConfirmLazyRoute = LayoutBookingConfirmLazyImport.update({
+const LayoutBookingConfirmRoute = LayoutBookingConfirmImport.update({
   id: '/bookingConfirm',
   path: '/bookingConfirm',
   getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.bookingConfirm.lazy').then((d) => d.Route),
-)
+} as any)
 
-const LayoutBookingLazyRoute = LayoutBookingLazyImport.update({
+const LayoutBookingRoute = LayoutBookingImport.update({
   id: '/booking',
   path: '/booking',
   getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.booking.lazy').then((d) => d.Route),
-)
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -92,7 +77,7 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
+      preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
     '/_layout': {
@@ -106,42 +91,42 @@ declare module '@tanstack/react-router' {
       id: '/loginStudent'
       path: '/loginStudent'
       fullPath: '/loginStudent'
-      preLoaderRoute: typeof LoginStudentLazyImport
+      preLoaderRoute: typeof LoginStudentImport
       parentRoute: typeof rootRoute
     }
     '/loginTeacher': {
       id: '/loginTeacher'
       path: '/loginTeacher'
       fullPath: '/loginTeacher'
-      preLoaderRoute: typeof LoginTeacherLazyImport
+      preLoaderRoute: typeof LoginTeacherImport
       parentRoute: typeof rootRoute
     }
     '/studentTeacher': {
       id: '/studentTeacher'
       path: '/studentTeacher'
       fullPath: '/studentTeacher'
-      preLoaderRoute: typeof StudentTeacherLazyImport
+      preLoaderRoute: typeof StudentTeacherImport
       parentRoute: typeof rootRoute
     }
     '/_layout/booking': {
       id: '/_layout/booking'
       path: '/booking'
       fullPath: '/booking'
-      preLoaderRoute: typeof LayoutBookingLazyImport
+      preLoaderRoute: typeof LayoutBookingImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/bookingConfirm': {
       id: '/_layout/bookingConfirm'
       path: '/bookingConfirm'
       fullPath: '/bookingConfirm'
-      preLoaderRoute: typeof LayoutBookingConfirmLazyImport
+      preLoaderRoute: typeof LayoutBookingConfirmImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/myBookings': {
       id: '/_layout/myBookings'
       path: '/myBookings'
       fullPath: '/myBookings'
-      preLoaderRoute: typeof LayoutMyBookingsLazyImport
+      preLoaderRoute: typeof LayoutMyBookingsImport
       parentRoute: typeof LayoutImport
     }
   }
@@ -150,52 +135,52 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface LayoutRouteChildren {
-  LayoutBookingLazyRoute: typeof LayoutBookingLazyRoute
-  LayoutBookingConfirmLazyRoute: typeof LayoutBookingConfirmLazyRoute
-  LayoutMyBookingsLazyRoute: typeof LayoutMyBookingsLazyRoute
+  LayoutBookingRoute: typeof LayoutBookingRoute
+  LayoutBookingConfirmRoute: typeof LayoutBookingConfirmRoute
+  LayoutMyBookingsRoute: typeof LayoutMyBookingsRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutBookingLazyRoute: LayoutBookingLazyRoute,
-  LayoutBookingConfirmLazyRoute: LayoutBookingConfirmLazyRoute,
-  LayoutMyBookingsLazyRoute: LayoutMyBookingsLazyRoute,
+  LayoutBookingRoute: LayoutBookingRoute,
+  LayoutBookingConfirmRoute: LayoutBookingConfirmRoute,
+  LayoutMyBookingsRoute: LayoutMyBookingsRoute,
 }
 
 const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '': typeof LayoutRouteWithChildren
-  '/loginStudent': typeof LoginStudentLazyRoute
-  '/loginTeacher': typeof LoginTeacherLazyRoute
-  '/studentTeacher': typeof StudentTeacherLazyRoute
-  '/booking': typeof LayoutBookingLazyRoute
-  '/bookingConfirm': typeof LayoutBookingConfirmLazyRoute
-  '/myBookings': typeof LayoutMyBookingsLazyRoute
+  '/loginStudent': typeof LoginStudentRoute
+  '/loginTeacher': typeof LoginTeacherRoute
+  '/studentTeacher': typeof StudentTeacherRoute
+  '/booking': typeof LayoutBookingRoute
+  '/bookingConfirm': typeof LayoutBookingConfirmRoute
+  '/myBookings': typeof LayoutMyBookingsRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '': typeof LayoutRouteWithChildren
-  '/loginStudent': typeof LoginStudentLazyRoute
-  '/loginTeacher': typeof LoginTeacherLazyRoute
-  '/studentTeacher': typeof StudentTeacherLazyRoute
-  '/booking': typeof LayoutBookingLazyRoute
-  '/bookingConfirm': typeof LayoutBookingConfirmLazyRoute
-  '/myBookings': typeof LayoutMyBookingsLazyRoute
+  '/loginStudent': typeof LoginStudentRoute
+  '/loginTeacher': typeof LoginTeacherRoute
+  '/studentTeacher': typeof StudentTeacherRoute
+  '/booking': typeof LayoutBookingRoute
+  '/bookingConfirm': typeof LayoutBookingConfirmRoute
+  '/myBookings': typeof LayoutMyBookingsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/_layout': typeof LayoutRouteWithChildren
-  '/loginStudent': typeof LoginStudentLazyRoute
-  '/loginTeacher': typeof LoginTeacherLazyRoute
-  '/studentTeacher': typeof StudentTeacherLazyRoute
-  '/_layout/booking': typeof LayoutBookingLazyRoute
-  '/_layout/bookingConfirm': typeof LayoutBookingConfirmLazyRoute
-  '/_layout/myBookings': typeof LayoutMyBookingsLazyRoute
+  '/loginStudent': typeof LoginStudentRoute
+  '/loginTeacher': typeof LoginTeacherRoute
+  '/studentTeacher': typeof StudentTeacherRoute
+  '/_layout/booking': typeof LayoutBookingRoute
+  '/_layout/bookingConfirm': typeof LayoutBookingConfirmRoute
+  '/_layout/myBookings': typeof LayoutMyBookingsRoute
 }
 
 export interface FileRouteTypes {
@@ -233,19 +218,19 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
+  IndexRoute: typeof IndexRoute
   LayoutRoute: typeof LayoutRouteWithChildren
-  LoginStudentLazyRoute: typeof LoginStudentLazyRoute
-  LoginTeacherLazyRoute: typeof LoginTeacherLazyRoute
-  StudentTeacherLazyRoute: typeof StudentTeacherLazyRoute
+  LoginStudentRoute: typeof LoginStudentRoute
+  LoginTeacherRoute: typeof LoginTeacherRoute
+  StudentTeacherRoute: typeof StudentTeacherRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
+  IndexRoute: IndexRoute,
   LayoutRoute: LayoutRouteWithChildren,
-  LoginStudentLazyRoute: LoginStudentLazyRoute,
-  LoginTeacherLazyRoute: LoginTeacherLazyRoute,
-  StudentTeacherLazyRoute: StudentTeacherLazyRoute,
+  LoginStudentRoute: LoginStudentRoute,
+  LoginTeacherRoute: LoginTeacherRoute,
+  StudentTeacherRoute: StudentTeacherRoute,
 }
 
 export const routeTree = rootRoute
@@ -266,7 +251,7 @@ export const routeTree = rootRoute
       ]
     },
     "/": {
-      "filePath": "index.lazy.jsx"
+      "filePath": "index.jsx"
     },
     "/_layout": {
       "filePath": "_layout.jsx",
@@ -277,24 +262,24 @@ export const routeTree = rootRoute
       ]
     },
     "/loginStudent": {
-      "filePath": "loginStudent.lazy.jsx"
+      "filePath": "loginStudent.jsx"
     },
     "/loginTeacher": {
-      "filePath": "loginTeacher.lazy.jsx"
+      "filePath": "loginTeacher.jsx"
     },
     "/studentTeacher": {
-      "filePath": "studentTeacher.lazy.jsx"
+      "filePath": "studentTeacher.jsx"
     },
     "/_layout/booking": {
-      "filePath": "_layout.booking.lazy.jsx",
+      "filePath": "_layout.booking.jsx",
       "parent": "/_layout"
     },
     "/_layout/bookingConfirm": {
-      "filePath": "_layout.bookingConfirm.lazy.jsx",
+      "filePath": "_layout.bookingConfirm.jsx",
       "parent": "/_layout"
     },
     "/_layout/myBookings": {
-      "filePath": "_layout.myBookings.lazy.jsx",
+      "filePath": "_layout.myBookings.jsx",
       "parent": "/_layout"
     }
   }
