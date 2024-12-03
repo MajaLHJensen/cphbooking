@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { colorsTuple } from "@mantine/core";
 import { Avatar } from '@mantine/core';
 
 

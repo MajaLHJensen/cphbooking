@@ -3,11 +3,7 @@ import { createFileRoute, useRouteContext } from '@tanstack/react-router'
 import { Container, Button } from '@mantine/core'
 import styles from '../components/LoginForm.module.css'
 import '../components/ButtonStyles.css'
-import {
-  createRootRouteWithContext,
-  Link,
-  Outlet,
-} from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/studentTeacher')({
   component: RouteComponent,

@@ -50,7 +50,7 @@ function FrontPageContent() {
     return (
         <div style={styles.container}>
             <img
-                src="/cphbooking/img/h.jpg"
+                src="/cphbooking/img/h.webp"
                 alt="Cphbusiness baggrund"
                 style={styles.backgroundImage}
             />

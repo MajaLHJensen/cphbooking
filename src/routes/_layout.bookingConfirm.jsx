@@ -1,9 +1,7 @@
 import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-// import '@fortawesome/fontawesome-free/css/all.min.css'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import '../components/ButtonStyles.css'
 import { Button } from '@mantine/core'
-import { Link, useNavigate, useRouteContext } from '@tanstack/react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 

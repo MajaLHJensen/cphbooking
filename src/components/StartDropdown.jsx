@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
 import classes from './DropdownPositionStyles.module.css';
 

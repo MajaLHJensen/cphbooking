@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useRouteContext } from '@tanstack/react-router'
 import NewCalendar from '../components/NewCalendar'
-import NumberInput from '../components/NumberInput'
 import Schedule from '../components/Schedule'
 import { useEffect, useState } from 'react'
 import Dropdown from '../components/Dropdown'
@@ -63,6 +62,21 @@ function RouteComponent() {
 
   async function makeBooking() {
     const data = calculateBooking(selectedRoom, startTime, endTime)
+
+    // Konverterer den valgte dato (datePicked) til et JavaScript Date-objekt
+    const selectedDate = new Date(datePicked);
+
+    // Får dagen i ugen som et tal (0 = søndag, 1 = mandag, ..., 6 = lørdag)
+    const day = selectedDate.getDay();
+
+    // Tjekker, om dagen er søndag (0) eller lørdag (6)
+    if (day === 0 || day === 6) {
+   // Viser en besked til brugeren og stopper booking-processen
+    alert("Du kan ikke booke i weekenden.");
+    return; 
+    }
+
+    console.log("Booking gennemført!");
 
     try {
       const existingBookingsResponse = await fetch(
@@ -161,13 +175,19 @@ function RouteComponent() {
           </Button>
         </div>
         <Modal
-          opened={modalOpened}
-          onClose={() => setModalOpened(false)}
-          centered
-          withCloseButton={false}
-          overlayProps={{ className: "modalOverlay" }}
-          styles={{ content: "modalContent" }}
-        >
+            opened={modalOpened}
+            onClose={() => setModalOpened(false)}
+            centered
+            withCloseButton={false}
+            overlayProps={{ className: "modalOverlay" }}
+            styles={{
+              content: {
+                padding: "20px",
+               backgroundColor:"#6eb47e",
+                borderRadius: "8px",
+              },
+            }}
+          >
           <div className="modalInnerSection">
             <h3 className="modalSummary">Opsummering:</h3>
             <div className="modalSummaryContent">

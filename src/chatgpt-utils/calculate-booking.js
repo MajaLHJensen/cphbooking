@@ -44,5 +44,3 @@
     // Test funktionen
     // const result = calculateBooking("Lokale 2.13", "9", "12");
     // console.log(result);
-    
-
