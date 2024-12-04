@@ -21,27 +21,15 @@ declare module "@tanstack/react-router" {
 
 export default function App() {
   const [userInfo, setUserInfo] = useState(undefined);
-  // const [isLoading, setIsLoading] = useState(true); // Tilstand for loading
-
-  // useEffect(() => {
-  //   // Simulerer en loading-periode på 2 sekunder
-  //   const timer = setTimeout(() => setIsLoading(false), 2000);
-  //   return () => clearTimeout(timer); // Rydder op efter timeout
-  // }, []);
 
   const context = {
     supabase: getSupabaseClient(),
     userInfo,
-    setUserInfo,
+    setUserInfo
   };
 
   return (
     <div>
-      {/* {isLoading ? ( // Hvis loading er sand, vis Loader
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <Loader color="blue" />
-        </div>
-      ) : ( // Når loading er færdig, vis applikationen */}
         <MantineProvider>
           <ModalsProvider>
             <RouterProvider 
@@ -51,7 +39,6 @@ export default function App() {
             />
           </ModalsProvider>
         </MantineProvider>
-      {/* )} */}
     </div>
   );
 }

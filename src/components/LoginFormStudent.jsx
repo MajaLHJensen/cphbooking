@@ -6,9 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import '../components/ButtonStyles.css';
 import { createClient } from "@supabase/supabase-js";
-
-const SUPABASE_URL = 'https://czvtumfwyoalvjjriqjd.supabase.co';
-const PUBLIC_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6dnR1bWZ3eW9hbHZqanJpcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDI4NzAsImV4cCI6MjA0NzA3ODg3MH0.NEY9zyupKwJFon_TWRWVrlTM8Yd_UXAjB-YhbeAIelE';
+import { SUPABASE_URL, PUBLIC_ANON_KEY } from "../supabase/getSupabaseClient";
 
 const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
 
@@ -44,8 +42,6 @@ export default function LoginForm() {
       email,
       password,
     });
-
-   
 
     // 1. Gemme info på brugeren
     const userInfo = {

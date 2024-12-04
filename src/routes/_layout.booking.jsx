@@ -11,14 +11,11 @@ import { calculateBooking } from '../chatgpt-utils/calculate-booking'
 import { Modal, Button } from '@mantine/core'
 import '../components/ButtonStyles.css'
 import '../components/BookingStyles.css'
+import { SUPABASE_URL, PUBLIC_ANON_KEY } from "../supabase/getSupabaseClient";
 
 export const Route = createFileRoute('/_layout/booking')({
   component: RouteComponent,
 })
-
-const SUPABASE_URL = 'https://czvtumfwyoalvjjriqjd.supabase.co'
-const PUBLIC_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6dnR1bWZ3eW9hbHZqanJpcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDI4NzAsImV4cCI6MjA0NzA3ODg3MH0.NEY9zyupKwJFon_TWRWVrlTM8Yd_UXAjB-YhbeAIelE'
 
 function RouteComponent() {
   const [datePicked, setDatePicked] = useState(dayjs())
@@ -49,11 +46,11 @@ function RouteComponent() {
 
     if (data.length === 0) {
       setBookings({
-        'Lokale 2.13': [],
-        'Lokale 2.88': [],
-        'Lokale 3.05': [],
-        'Lokale 3.08': [],
-        'Lokale 3.14': [],
+        'Lokale 2.13 (4 pers.)': [],
+        'Lokale 2.88 (3 pers.)': [],
+        'Lokale 3.05 (8 pers.)': [],
+        'Lokale 3.08 (4 pers.)': [],
+        'Lokale 3.14 (6 pers.)': [],
       })
     } else {
       setBookings(combineSchedules(data))
@@ -76,7 +73,6 @@ function RouteComponent() {
     return; 
     }
 
-    console.log("Booking gennemført!");
 
     try {
       const existingBookingsResponse = await fetch(
@@ -130,6 +126,7 @@ function RouteComponent() {
 
   async function confirmBooking() {
     console.log(bookingInfo)
+    bookingInfo.email = "test@test.dk"; // dummy test data, slet denne linje igen.
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
         method: 'POST',
@@ -151,8 +148,10 @@ function RouteComponent() {
       getBookings()
     } catch (error) {
       console.error('Fejl:', error)
-      alert(`Fejl: ${error.message}`)
+      // alert(`Fejl: ${error.message}`)
     }
+
+    console.log("Booking gennemført!");
   }
 
   async function cancelBooking() {

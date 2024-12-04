@@ -2,11 +2,11 @@ import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
 import classes from './DropdownPositionStyles.module.css';
 
 const lokaler = [
-  'Lokale 2.13',
-  'Lokale 2.88',
-  'Lokale 3.05',
-  'Lokale 3.08',
-  'Lokale 3.14',
+      'Lokale 2.13 (4 pers.)',
+        'Lokale 2.88 (3 pers.)',
+        'Lokale 3.05 (8 pers.)',
+        'Lokale 3.08 (4 pers.)',
+        'Lokale 3.14 (6 pers.)'
 ];
 
 export default function Dropdown({selectedRoom, setSelectedRoom}) {

@@ -3,9 +3,8 @@ import { Link } from '@tanstack/react-router';
 import { createClient } from "@supabase/supabase-js";
 import { Button, Container } from '@mantine/core';
 import '../components/ButtonStyles.css';
+import { SUPABASE_URL, PUBLIC_ANON_KEY } from "../supabase/getSupabaseClient";
 
-const SUPABASE_URL = 'https://czvtumfwyoalvjjriqjd.supabase.co';
-const PUBLIC_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6dnR1bWZ3eW9hbHZqanJpcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDI4NzAsImV4cCI6MjA0NzA3ODg3MH0.NEY9zyupKwJFon_TWRWVrlTM8Yd_UXAjB-YhbeAIelE'; // Replace with your actual key
 const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
 
 export default function BookingOverview() {
@@ -46,14 +45,24 @@ export default function BookingOverview() {
 
   async function viewBookings() {
     setLoading(true);
-    const data = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+    const data = await fetch(`${SUPABASE_URL}/rest/v1/bookings?select=*&order=booking_date.desc`, {
       headers: {
         apikey: PUBLIC_ANON_KEY,
         Authorization: `Bearer ${PUBLIC_ANON_KEY}`,
       },
     }).then((response) => response.json());
 
-    setBookings(data);
+    // Formater datoer 
+    const formattedData = data.map((booking) => ({
+        ...booking,
+        formattedDate: new Intl.DateTimeFormat('da-DK', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        }).format(new Date(booking.booking_date)),
+      }));
+
+    setBookings(formattedData);
     setLoading(false);
   }
 
@@ -78,7 +87,7 @@ export default function BookingOverview() {
             <div key={booking.id} style={styles.bookingCard}>
               <div>
                 <p>
-                  <b>Dato:</b> {booking.booking_date}
+                  <b>Dato:</b> {booking.formattedDate}
                 </p>
                 <p>
                   <b>Lokale:</b> {booking.selectedRoom}
