@@ -28,6 +28,7 @@
     "@mantine/spotlight": "^7.13.4",
     "@supabase/supabase-js": "^2.46.1",
     "@tanstack/react-router": "^1.79.0",
+    "@tanstack/router": "^0.0.1-beta.53",
     "dayjs": "^1.11.13",
     "embla-carousel-react": "^7.1.0",
     "react": "^18.3.1",

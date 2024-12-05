@@ -1,6 +1,7 @@
 import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
 import classes from './DropdownPositionStyles.module.css';
 
+// Definerer en liste af tider (sluttidspunkter), som skal vises i dropdown-menuen
 const startTimeTable = [
   '08:00',
   '09:00',
@@ -15,12 +16,16 @@ const startTimeTable = [
 ];
 
 export default function StartDropdown({startTime, setStartTime}) {
+    // Opretter dropdown fra mantine
   const combobox = useCombobox({
+    // Når dropdownen lukkes, nulstilles den valgte mulighed
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-
+  // Går igennem starttidspunkt til dropdown component og skaber en ny option
   const options = startTimeTable.map((item) => (
+    // V: Værdien, der bliver sendt, når brugeren vælger denne mulighed.
+    // K: En unik nøgle, som React kræver for at optimere rendering af lister.
     <Combobox.Option value={item} key={item}>
       {item}
     </Combobox.Option>

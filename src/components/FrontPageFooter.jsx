@@ -2,106 +2,108 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 function FrontPageFooter() {
+    // CSS styles object for the footer component
     const styles = {
       footer: {
-        backgroundColor: "#002e6d",
-        color: "white",
-        fontFamily: "Arial, sans-serif",
-        padding: "20px 40px",
-        borderTop: "5px solid #fbb041",
+        backgroundColor: "#002e6d",  
+        color: "white",  
+        fontFamily: "Arial, sans-serif", 
+        padding: "20px 40px",  
+        borderTop: "5px solid #fbb041", 
       },
       footerTop: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        paddingTop: "30px",
+        display: "flex", 
+        flexWrap: "wrap", 
+        justifyContent: "space-between",  
+        alignItems: "flex-start",  
+        paddingTop: "30px", 
       },
       footerLogoSection: {
-        display: "flex",
-        alignItems: "center",
-        marginBottom: "20px",
+        display: "flex",  
+        alignItems: "center",  
+        marginBottom: "20px", 
       },
       footerLogo: {
-        width: 'auto',
-        height: '80px',
+        width: 'auto', 
+        height: '80px', 
       },
       iconContainer: {
-        display: "flex",
-        alignItems: "center",
-        gap: "20px",
+        display: "flex", 
+        alignItems: "center",  
+        gap: "20px", 
       },
       icon: {
-        color: "white",
-        width: "50%",
+        color: "white", 
+        width: "50%", 
         height: "auto", 
       },
       iconBox: {
-        width: "40px",
-        height: "40px", 
-        backgroundColor: "#fbb041",
+        width: "40px", 
+        height: "40px",  
+        backgroundColor: "#fbb041",  
         display: "flex",  
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "center",  
+        justifyContent: "center", 
       }, 
       footerLinks: {
-        display: "flex",
-        justifyContent: "center",
-        flex: 1,
-        gap: "40px",
+        display: "flex",  
+        justifyContent: "center", 
+        flex: 1, 
+        gap: "40px",  
       },
       footerColumn: {
-        flex: 1,
+        flex: 1,  
       },
       footerColumnHeader: {
-        fontSize: "18px",
-        marginBottom: "10px",
-        color: "#b6bfd4",
+        fontSize: "18px", 
+        marginBottom: "10px",  
+        color: "#b6bfd4",  
       },
       footerColumnList: {
-        listStyle: "disc",
-        margin: "0",
-        paddingLeft: "20px",
+        listStyle: "disc",  
+        margin: "0", 
+        paddingLeft: "20px", 
       },
       footerColumnItem: {
-        marginBottom: "8px",
-        fontWeight: "bold",
+        marginBottom: "8px",  
+        fontWeight: "bold",  
       },
       footerHighlight: {
-        fontSize: "14px",
-        color: "white", 
+        fontSize: "14px",  
+        color: "white",  
       },
       footerDivider: {
-        border: "none",
-        height: "2px",
-        backgroundColor: "#fbb041",
-        margin: "20px 0",
+        border: "none", 
+        height: "2px",  
+        backgroundColor: "#fbb041",  
+        margin: "20px 0",  
       },
       language:{
-        fontSize: "18px",
-        paddingBottom: "30px",
-       textAlign: "center",
+        fontSize: "18px", 
+        paddingBottom: "30px",  
+        textAlign: "center",  
       },
       footerBottomText: {
-        textAlign: "center",
+        textAlign: "center",  
       },
       footerBottomHighlight: {
-        fontWeight: "bold",
+        fontWeight: "bold", 
       },
       footerBottomLinks: {
-        display: "flex",
-        flexDirection: "column",
+        display: "flex",  
+        flexDirection: "column", 
       },
     };
   
     return (
       <footer style={styles.footer}>
-        {/* Top section with logo and icons */}
+        {/* Top section with logo and social media icons */}
         <div style={styles.footerTop}>
             <div style={styles.footerLogoSection}>
                 <img style={styles.footerLogo} src="/cphbooking/img/cphlogo.webp" alt="Cphbusiness logo" />
             </div>
             <div style={styles.iconContainer}>
+                {/* Social media icons */}
                 <div style={styles.iconBox}>
                 <FontAwesomeIcon style={styles.icon} icon={faFacebook}/>
                 </div>
@@ -116,8 +118,8 @@ function FrontPageFooter() {
                 </div>
             </div>
         </div>
-          <div style={styles.footerLinks}>
-            {/* Hurtig adgang section */}
+        <div style={styles.footerLinks}>
+            {/* Quick access section */}
             <div style={styles.footerColumn}>
               <h4 style={styles.footerColumnHeader}>Hurtig adgang til:</h4>
               <ul style={styles.footerColumnList}>
@@ -135,7 +137,7 @@ function FrontPageFooter() {
                 </li>
               </ul>
             </div>
-            {/* Læringsværktøjer section */}
+            {/* Learning tools section */}
             <div style={styles.footerColumn}>
               <h4 style={styles.footerColumnHeader}>Læringsværktøjer:</h4>
               <ul style={styles.footerColumnList}>
@@ -161,7 +163,7 @@ function FrontPageFooter() {
                 </li>
               </ul>
             </div>
-            {/* specielt for studerende section */}
+            {/* Section for students */}
             <div style={styles.footerColumn}>
               <h4 style={styles.footerColumnHeader}>Specielt for studerende:</h4>
               <ul style={styles.footerColumnList}>
@@ -184,9 +186,9 @@ function FrontPageFooter() {
                 <li style={styles.footerColumnItem}>Webshop</li>
               </ul>
             </div>
-          </div>
+        </div>
         <hr style={styles.footerDivider} />
-        {/* Bottom section */}
+        {/* Bottom section with language change option and additional links */}
         <div>
           <h3 style={styles.language}>Change Language</h3>
           <p style={styles.footerBottomText}>
@@ -204,4 +206,3 @@ function FrontPageFooter() {
   }
   
   export default FrontPageFooter;
-  

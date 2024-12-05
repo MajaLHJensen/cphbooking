@@ -1,3 +1,4 @@
+/* Hvid knap på grøn baggrund */ 
 .whiteBtn{
     background-color: transparent;
     color: #6eb47e;
@@ -9,11 +10,13 @@
     text-decoration: none;
 }
 
+/* Hvid knap på grøn baggrund med hover effekt */ 
 .whiteBtn:hover {
     background-color: #6eb47e;
     color: white;
 }
 
+/* Grøn knap på hvid baggrund */ 
 .greenBtn{
     background-color: transparent;
     color: white;
@@ -25,6 +28,7 @@
     text-decoration: none;
 }
 
+/* Grøn knap på hvid baggrund med gover effekt */ 
 .greenBtn:hover {
     background-color: white;
     color: #6eb47e;
@@ -39,6 +43,7 @@
     font-weight: 300;
 }
 
+/* Tilbage knappen på login formen med hover effekt */
 .transparentBtn:hover{
     background-color: transparent;
 }
@@ -48,7 +53,7 @@
     padding-right: 10px;
 }
 
-  /* Knap til at slette */
+/* Knap til at slette på myBookings siden */
 .deleteButton {
     background-color: white;
     color: #6eb47e;
@@ -59,6 +64,8 @@
     transition: background-color 0.3s ease;
 }
   
+
+/* Knap til at slette på myBookings siden med hover effekt */
 .deleteButton:hover {
     background-color: #ff6b6b;
     color: white;

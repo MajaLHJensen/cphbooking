@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useRouteContext } from '@tanstack/react-router'
+import { createFileRoute, Link, useRouteContext, useNavigate } from '@tanstack/react-router'
 import NewCalendar from '../components/NewCalendar'
 import Schedule from '../components/Schedule'
 import { useEffect, useState } from 'react'
@@ -12,6 +12,8 @@ import { Modal, Button } from '@mantine/core'
 import '../components/ButtonStyles.css'
 import '../components/BookingStyles.css'
 import { SUPABASE_URL, PUBLIC_ANON_KEY } from "../supabase/getSupabaseClient";
+import Spinner from '../components/Spinner'
+
 
 export const Route = createFileRoute('/_layout/booking')({
   component: RouteComponent,
@@ -24,8 +26,10 @@ function RouteComponent() {
   const [endTime, setEndTime] = useState('')
   const [selectedRoom, setSelectedRoom] = useState('')
   const [modalOpened, setModalOpened] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const [bookingInfo, setBookingInfo] = useState(null)
   const context = useRouteContext({ from: '/_layout/booking' })
+  const navigate = useNavigate({from: "/_layout/booking"}); 
   console.log(context)
 
   useEffect(() => {
@@ -58,6 +62,8 @@ function RouteComponent() {
   }
 
   async function makeBooking() {
+    setLoading(true);
+
     const data = calculateBooking(selectedRoom, startTime, endTime)
 
     // Konverterer den valgte dato (datePicked) til et JavaScript Date-objekt
@@ -108,6 +114,8 @@ function RouteComponent() {
         return
       }
 
+      setLoading(false); 
+
       // Åbn modal og gem bookinginformation
       setBookingInfo({
         booking_date: dayjs(datePicked).format('YYYY-MM-DD'),
@@ -126,7 +134,8 @@ function RouteComponent() {
 
   async function confirmBooking() {
     console.log(bookingInfo)
-    bookingInfo.email = "test@test.dk"; // dummy test data, slet denne linje igen.
+    setLoading(true); 
+    // bookingInfo.email = "test@test.dk"; // dummy test data, slet denne linje igen.
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
         method: 'POST',
@@ -139,6 +148,7 @@ function RouteComponent() {
       })
 
       console.log(response)
+
       if (!response.ok) {
         throw new Error(`Fejl ved oprettelse af booking: ${response.status}`)
       }
@@ -149,7 +159,10 @@ function RouteComponent() {
     } catch (error) {
       console.error('Fejl:', error)
       // alert(`Fejl: ${error.message}`)
-    }
+    } finally {
+    setLoading(false);  // Sørger for at 'loading' altid bliver sat til false
+    navigate({to: "/bookingConfirm"});
+}
 
     console.log("Booking gennemført!");
   }
@@ -168,6 +181,8 @@ function RouteComponent() {
           <StartDropdown startTime={startTime} setStartTime={setStartTime} />
           <EndDropdown endTime={endTime} setEndTime={setEndTime} />
         </div>
+        {isLoading && <Spinner/>}
+        
         <div className="bookButtonContainer">
           <Button className="whiteBtn" onClick={makeBooking}>
             Book
@@ -208,11 +223,10 @@ function RouteComponent() {
             <Button className="greenBtn" onClick={cancelBooking}>
               Annuller
             </Button>
-            <Link to="/bookingConfirm">
+            {isLoading && <Spinner/>}
               <Button className="greenBtn" onClick={confirmBooking}>
                 Bekræft
               </Button>
-            </Link>
           </div>
         </Modal>
       </div>

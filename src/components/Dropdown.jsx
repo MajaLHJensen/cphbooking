@@ -1,52 +1,63 @@
 import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
 import classes from './DropdownPositionStyles.module.css';
 
+// Definerer en liste af lokaler, som skal vises i dropdown-menuen
 const lokaler = [
-      'Lokale 2.13 (4 pers.)',
-        'Lokale 2.88 (3 pers.)',
-        'Lokale 3.05 (8 pers.)',
-        'Lokale 3.08 (4 pers.)',
-        'Lokale 3.14 (6 pers.)'
+  'Lokale 2.13 (4 pers.)',
+  'Lokale 2.88 (3 pers.)',
+  'Lokale 3.05 (8 pers.)',
+  'Lokale 3.08 (4 pers.)',
+  'Lokale 3.14 (6 pers.)'
 ];
 
-export default function Dropdown({selectedRoom, setSelectedRoom}) {
+export default function Dropdown({ selectedRoom, setSelectedRoom }) {
+  // Opretter dropdown fra mantine
   const combobox = useCombobox({
+    // Når dropdownen lukkes, nulstilles den valgte mulighed
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
+  // Går igennem lokalerne til dropdown component og skaber en ny option
   const options = lokaler.map((item) => (
+    // V: Værdien, der bliver sendt, når brugeren vælger denne mulighed.
+    // K: En unik nøgle, som React kræver for at optimere rendering af lister.
     <Combobox.Option value={item} key={item}>
-      {item}
+      {item} {/* Vist tekst for hver mulighed */}
     </Combobox.Option>
   ));
 
+  // Returnerer indholdet fra dropdown -----------------------christian
   return (
     <Combobox
-      store={combobox}
-      withinPortal={false}
-      offset={0}
+      store={combobox}  // Binder Comboboxens tilstand til useCombobox hooken
+      withinPortal={false}  // Dropdown-menuen renderes indenfor komponenten
+      offset={0}  // Justerer placeringen af dropdownen
+      // Når en valgmulighed er valgt, opdateres den valgte værdi og dropdownen lukkes
       onOptionSubmit={(val) => {
-        setSelectedRoom(val);
-        combobox.closeDropdown();
+        setSelectedRoom(val); // Opdaterer den valgte værdi
+        combobox.closeDropdown(); // Lukker dropdownen
       }}
     >
+      {/* Target-komponenten bruges til at vise knappen, der åbner dropdownen */}
       <Combobox.Target>
         <InputBase
-          component="button"
-          type="button"
+          component="button"  // Gør InputBase til en knap
+          type="button"  
           pointer
-          label="Vælg Lokale"
-          withAsterisk
-          rightSection={<Combobox.Chevron />}
-          onClick={() => combobox.toggleDropdown()}
-          rightSectionPointerEvents="none"
-          classNames={ classes.input }
+          label="Vælg Lokale" 
+          withAsterisk  
+          rightSection={<Combobox.Chevron />}  // En pil-ikon til højre for input-knappen
+          onClick={() => combobox.toggleDropdown()}  // Åbner/lukker dropdownen, når knappen klikkes
+          rightSectionPointerEvents="none"  
+          classNames={classes.input} 
         >
+          {/* Hvis der er valgt et lokale, vises det; ellers vises en placeholder */}
           {selectedRoom || <Input.Placeholder>Vælg lokale</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
-
+      {/* Dropdown-menuen, der indeholder alle mulighederne */}
       <Combobox.Dropdown className={classes.dropdown}>
+        {/* Går igennem de tidligere oprettede options til visning i dropdown-menuen */}
         <Combobox.Options>{options}</Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
