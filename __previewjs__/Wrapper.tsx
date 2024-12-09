@@ -14,7 +14,6 @@ import "@mantine/dates/styles.css";
 import "@mantine/dropzone/styles.css";
 import "@mantine/carousel/styles.css";
 import "@mantine/spotlight/styles.css";
-import "../src/global.css";
 
 export const Wrapper = ({ children }) => (
   <MantineProvider>

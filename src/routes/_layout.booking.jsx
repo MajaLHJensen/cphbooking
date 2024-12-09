@@ -235,7 +235,7 @@ function RouteComponent() {
                 <b>Tidsrum:</b> {startTime} - {endTime}
               </p>
               <p>
-                <b>Email:</b> {context.userInfo?.email}
+                <b>Email:</b> {context.userInfo.email}
               </p>
             </div>
           </div>

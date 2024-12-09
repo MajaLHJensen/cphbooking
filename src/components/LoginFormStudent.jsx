@@ -118,7 +118,7 @@ export default function LoginForm() {
           {passwordError && <span style={{color: "red"}} className="error">Forkert password</span>}
           
           {/* Log ind knap */}
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: "40px"}}>
             {/* Knap til at sende login-anmodningen */}
             <Button size="lg" className='greenBtn' onClick={handleLogin}>Log ind</Button>  
           </div>
