@@ -11,7 +11,9 @@ const hashHistory = createHashHistory();
 export const router = createRouter({
   routeTree,
   context: {
-  supabase: undefined!,
+    supabase: undefined!,
+    userInfo: undefined!,
+    setUserInfo: undefined!
   },
   history: hashHistory
 });
@@ -23,7 +25,11 @@ declare module "@tanstack/react-router" {
 }
 
 export default function App() {
-  const [userInfo, setUserInfo] = useState(undefined);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    console.log("fra App.tsx", userInfo)
+  }, [userInfo])
 
   const context = {
     supabase: getSupabaseClient(),
@@ -37,7 +43,11 @@ export default function App() {
           <ModalsProvider>
             <RouterProvider 
               router={router} 
-              context={context} 
+              context={{
+                userInfo,
+                supabase: getSupabaseClient(),
+                setUserInfo
+              }} 
               basepath="/cphbooking" 
             />
           </ModalsProvider>

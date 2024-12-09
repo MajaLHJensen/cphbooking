@@ -1,5 +1,6 @@
 import React from "react";
 
+// ChatGPT magic
 const Schedule = ({ value }) => {
   // Tidsintervaller: 8:00 til 18:00
   // Opretter en array af timer fra 8 til 18 (11 tidsintervaller i alt)
@@ -8,45 +9,46 @@ const Schedule = ({ value }) => {
   // Inline-styling objekter til komponenten
   const styles = {
     container: {
-      margin: "5px",  // Margin omkring containeren
-      fontFamily: "Arial, sans-serif",  // Sætter skrifttypen
-      backgroundColor: "#F5F3F3",  // Baggrundsfarve
-      color: "black",  // Tekstfarve
-      fontWeight: 200,  // Sætter fontens vægt (tykkelse)
-      fontSize: "14px",  // Skrifttype størrelse
-      width: "90%",  // Sætter bredden på containeren til 90% af forældreelementet
-      maxWidth: "500%",  // Maksimal bredde af containeren (kan justeres efter behov)
-      borderRadius: "10px", // Afrundede hjørner
-      overflow: "hidden", // Beskær overflødig indhold, så det ikke går ud over containeren
+      margin: "5px", 
+      fontFamily: "Arial, sans-serif", 
+      backgroundColor: "#F5F3F3",  
+      color: "black", 
+      fontWeight: 200,  
+      fontSize: "14px",  
+      width: "90%",  
+      maxWidth: "500%",  
+      borderRadius: "10px",
+      overflow: "hidden", 
     },
     table: {
       borderCollapse: "collapse",  // Fjerner mellemrum mellem tabelcellerne
-      width: "100%",  // Tabelbredden skal være 100% af containerens bredde
-      textAlign: "center",  // Centrerer teksten i tabelcellerne
+      width: "100%",  
+      textAlign: "center",  
     },
     th: {
-      backgroundColor: "#ffeb99",  // Baggrundsfarve for tabelens header
+      backgroundColor: "#ffeb99",  
       position: "sticky",  // Gør headeren fastlåst ved scroll
-      top: 0,  // Sikrer at headeren forbliver øverst, når man scroller
-      padding: "15px",  // Indvendig margin i headeren
-      border: "1px solid #ddd",  // Giver headeren en lys kant
+      top: 0,  
+      padding: "15px", 
+      border: "1px solid #ddd", 
     },
     td: {
-      border: "1px solid #ddd",  // Kant omkring cellerne
-      padding: "5px",  // Indvendig margin i cellerne
-      fontWeight: 200,  // Skrifttypens vægt
+      border: "1px solid #ddd", 
+      padding: "3px", 
+      fontWeight: 200, 
     },
     busySlot: {
-      backgroundColor: "#ff6b6b",  // Farven der vises, når et tidsinterval er optaget (rød)
+      backgroundColor: "#ff6b6b",
     },
   };
 
   return (
     <div style={styles.container}>
       <table style={styles.table}>
+        {/* Tidspunkter */}
         <thead>
           <tr>
-            <th style={styles.th}></th> {/* Tom header til lokale kolonnen */}
+            <th style={styles.th}></th> {/* Table header til lokale kolonnen */}
             {times.map((time) => (
               // Mapper gennem 'times' og viser hver time som en header
               <th key={time} style={styles.th}>
@@ -56,16 +58,18 @@ const Schedule = ({ value }) => {
           </tr>
         </thead>
         <tbody>
+          {/* Lokaler/firkanter */}
+          {/* Mapper gennem 'value' objektnøglerne for at vise lokaler */}
           {Object.keys(value).map((room) => (
-            // Mapper gennem 'value' objektnøglerne for at vise lokaler
             <tr key={room}>
+              {/* td er tabeldata */}
               <td style={styles.td}>{room}</td> {/* Vist lokale navn i den første kolonne */}
               {times.map((time) => (
                 // Mapper gennem 'times' og viser en celle for hvert tidsinterval
                 <td
                   key={time}
                   style={{
-                    ...styles.td,  // Standard cellestil
+                    ...styles.td,  // Standard tabel stil
                     ...(value[room].includes(time) ? styles.busySlot : {}),  // Hvis tidsintervallet er optaget, tilføj 'busySlot' stil
                   }}
                 ></td>

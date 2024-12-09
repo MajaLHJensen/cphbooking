@@ -27,23 +27,23 @@ export default function EndDropdown({ endTime, setEndTime }) {
     // V: Værdien, der bliver sendt, når brugeren vælger denne mulighed.
     // K: En unik nøgle, som React kræver for at optimere rendering af lister.
     <Combobox.Option value={item} key={item}>
-      {item} {/* Vist tekst for hver mulighed */}
+      {item} {/* Vist tekst for hver stuttids mulighed */}
     </Combobox.Option>
   ));
 
-  // Returnerer UI for dropdownen --------christian
+  // Returnerer dropdown-komponenten, der bruges til at vælge et sluttidspunkt
   return (
     <Combobox
       store={combobox}  // Binder Comboboxens tilstand til useCombobox hooken
-      withinPortal={false}  // Dropdown-menuen renderes indenfor komponenten
-      offset={0}  // Justerer placeringen af dropdownen
+      withinPortal={false} // Sikrer, at dropdown-menuen vises indenfor komponentens område
+      offset={0} // Ingen ekstra afstand mellem knappen og dropdown-menuen
       // Når en valgmulighed er valgt, opdateres den valgte værdi og dropdownen lukkes
       onOptionSubmit={(val) => {
-        setEndTime(val); // Opdaterer den valgte værdi
+        setEndTime(val); // Gemmer det valgte sluttidspunkt
         combobox.closeDropdown(); // Lukker dropdownen
       }}
     >
-      {/* Target-komponenten bruges til at vise knappen, der åbner dropdownen */}
+      {/* Knappen, som brugeren klikker på for at åbne dropdown-menuen */}
       <Combobox.Target>
         <InputBase
           component="button"  // Gør InputBase til en knap
@@ -52,7 +52,7 @@ export default function EndDropdown({ endTime, setEndTime }) {
           label="Vælg slutstidspunkt"  
           withAsterisk  
           rightSection={<Combobox.Chevron />} // En pil-ikon til højre for input-knappen
-          onClick={() => combobox.toggleDropdown()}  // Åbner/lukker dropdownen, når knappen klikkes
+          onClick={() => combobox.toggleDropdown()}  // Åbner/lukker dropdown-menuen, når knappen klikkes
           rightSectionPointerEvents="none"  
           classNames={classes.input}  
         >
@@ -60,6 +60,7 @@ export default function EndDropdown({ endTime, setEndTime }) {
           {endTime || <Input.Placeholder>Vælg slutstidspunkt</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
+      
       {/* Dropdown-menuen, der indeholder alle mulighederne */}
       <Combobox.Dropdown className={classes.dropdown}>
         {/* Går igennem de tidligere oprettede options (tider) til visning i dropdown-menuen */}

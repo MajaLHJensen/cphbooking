@@ -14,33 +14,32 @@
     }
  */
 
-    export function calculateBooking(selectedRoom, startTime, endTime) {
-        console.log(selectedRoom, startTime, endTime);
-        const toReturn = {
+// Denne funktion beregner en booking for et valgt lokale og tidsinterval
+export function calculateBooking(selectedRoom, startTime, endTime) {
+    console.log(selectedRoom, startTime, endTime);
+
+    // Opretter en struktur med alle lokaler og tomme tidslister
+    const toReturn = {
         'Lokale 2.13 (4 pers.)': [],
         'Lokale 2.88 (3 pers.)': [],
         'Lokale 3.05 (8 pers.)': [],
         'Lokale 3.08 (4 pers.)': [],
         'Lokale 3.14 (6 pers.)': []
-        };
+    };
     
-        // Konverter start- og sluttider til heltal
-        const start = parseInt(startTime);
-        const end = parseInt(endTime);
+    // Konverter start- og sluttider til heltal
+    const start = parseInt(startTime);
+    const end = parseInt(endTime);
     
-        // Tjek at tiderne er valide
-        if (isNaN(start) || isNaN(end) || start >= end) {
-            throw new Error("Ugyldige start- eller sluttider.");
-        }
-    
-        // Fyld tidspunkterne for det valgte lokale
-        for (let hour = start; hour < end; hour++) {
-            toReturn[selectedRoom].push(hour);
-        }
-    
-        return toReturn;
+    // Tjek at tiderne er valide
+    if (isNaN(start) || isNaN(end) || start >= end) {
+        throw new Error("Ugyldige start- eller sluttider.");
     }
     
-    // Test funktionen
-    // const result = calculateBooking("Lokale 2.13", "9", "12");
-    // console.log(result);
+    // Fyld tidspunkterne for det valgte lokale
+    for (let hour = start; hour < end; hour++) {
+        toReturn[selectedRoom].push(hour);
+    }
+    
+    return toReturn;
+}

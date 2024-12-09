@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 function FrontPageFooter() {
-    // CSS styles object for the footer component
+    // CSS style object til footer komponentet
     const styles = {
       footer: {
         backgroundColor: "#002e6d",  
@@ -97,13 +97,12 @@ function FrontPageFooter() {
   
     return (
       <footer style={styles.footer}>
-        {/* Top section with logo and social media icons */}
+        {/* toppen sektion med logo og sociale medier ikoner */}
         <div style={styles.footerTop}>
             <div style={styles.footerLogoSection}>
                 <img style={styles.footerLogo} src="/cphbooking/img/cphlogo.webp" alt="Cphbusiness logo" />
             </div>
             <div style={styles.iconContainer}>
-                {/* Social media icons */}
                 <div style={styles.iconBox}>
                 <FontAwesomeIcon style={styles.icon} icon={faFacebook}/>
                 </div>
@@ -119,7 +118,7 @@ function FrontPageFooter() {
             </div>
         </div>
         <div style={styles.footerLinks}>
-            {/* Quick access section */}
+            {/* Hurtig adgang sektion */}
             <div style={styles.footerColumn}>
               <h4 style={styles.footerColumnHeader}>Hurtig adgang til:</h4>
               <ul style={styles.footerColumnList}>
@@ -137,7 +136,7 @@ function FrontPageFooter() {
                 </li>
               </ul>
             </div>
-            {/* Learning tools section */}
+            {/* Lærings værktøjs tektion */}
             <div style={styles.footerColumn}>
               <h4 style={styles.footerColumnHeader}>Læringsværktøjer:</h4>
               <ul style={styles.footerColumnList}>
@@ -163,7 +162,7 @@ function FrontPageFooter() {
                 </li>
               </ul>
             </div>
-            {/* Section for students */}
+            {/* sektion for students */}
             <div style={styles.footerColumn}>
               <h4 style={styles.footerColumnHeader}>Specielt for studerende:</h4>
               <ul style={styles.footerColumnList}>
@@ -188,7 +187,7 @@ function FrontPageFooter() {
             </div>
         </div>
         <hr style={styles.footerDivider} />
-        {/* Bottom section with language change option and additional links */}
+        {/* Ende sektionen */}
         <div>
           <h3 style={styles.language}>Change Language</h3>
           <p style={styles.footerBottomText}>

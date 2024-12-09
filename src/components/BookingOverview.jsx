@@ -53,7 +53,7 @@ export default function BookingOverview() {
     try {
       // Henter data fra Supabase REST API
       const data = await fetch(
-        `${SUPABASE_URL}/rest/v1/bookings?select=*&order=booking_date.desc`, // Henter alle bookings, sorteret efter dato
+        `${SUPABASE_URL}/rest/v1/bookings?select=*&order=booking_date.asc`, // Henter alle bookings, sorteret efter dato
         {
           headers: {
             apikey: PUBLIC_ANON_KEY, // Supabase API-nøgle for godkendelse

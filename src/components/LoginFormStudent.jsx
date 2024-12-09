@@ -1,6 +1,6 @@
 import { TextInput, PasswordInput, Button, Container } from "@mantine/core"; 
 import { useState } from "react";
-import { Link, useNavigate, useRouteContext } from "@tanstack/react-router"; 
+import { Link, useNavigate, useRouteContext, useRouter } from "@tanstack/react-router"; 
 import styles from "./LoginForm.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';  
@@ -8,20 +8,21 @@ import '../components/ButtonStyles.css';
 import { createClient } from "@supabase/supabase-js"; 
 import { SUPABASE_URL, PUBLIC_ANON_KEY } from "../supabase/getSupabaseClient"; 
 
-// Opretter en instans af Supabase klienten
+// Opretter en instans af Supabase klienten (man laver en kopi)
 const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
 
 export default function LoginForm() {
-  // Henter kontekst for ruten, så vi kan få adgang til brugerinfo og navigation
+  // Henter kontekst for routen, så vi kan få adgang til brugerinfo og navigation
+  const navigate = useNavigate();
   const context = useRouteContext({ from: "/loginStudent" });
-  const navigate = useNavigate({from: "/loginStudent"}); 
+
   const [name, setName] = useState("");  // State til at håndtere brugerens navn
   const [emailError, setEmailError] = useState("");  // State til fejlmeddelelse for email
   const [passwordError, setPasswordError] = useState("");  // State til fejlmeddelelse for password
  
   // Funktion til at håndtere login
   async function handleLogin(event) {
-    event.preventDefault();  // Forhindrer at siden opdateres ved formular indsendelse
+    event.preventDefault(); // Forhindrer browseren i at opdatere siden ved formular indsendelse
     const formData = new FormData(document.querySelector("#login-form"));  // Henter form data
     const email = formData.get("email");  // Henter email fra form data
     const password = formData.get("password");  // Henter password fra form data
@@ -36,30 +37,28 @@ export default function LoginForm() {
       setPasswordError("Forkert password")  // Sætter fejlmeddelelse for password
     }
 
-    console.log(name);  // Udskriver navnet til konsol
     console.log(email);  // Udskriver email til konsol
     console.log(password);  // Udskriver password til konsol
     console.log(context.supabase);  // Udskriver Supabase kontekst
 
     // Forsøger at logge ind med Supabase authentication
+    // Tjekker i supabasen om email og password er korrekt
     const { data, error } = await context.supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    // Gemmer brugerinfo, hvis login lykkes
-    const userInfo = {
-      name,
-      email: data.user.email,
-    };
-
     console.log("login", data.user.email);  // Udskriver den indloggede brugers email
 
-    context.setUserInfo(userInfo);  // Sætter brugerinfo i konteksten
+    context.setUserInfo({
+       
+      email: data.user.email,
+    })  // Sætter brugerinfo i konteksten/opsumeringen
 
     // Navigerer til booking side efter login
-    navigate({to: "/booking"});  // Redirect til /booking
-
+    setTimeout(() => {
+      navigate({to: "/booking"});
+    }, 500)
   }
 
   return (
@@ -70,8 +69,8 @@ export default function LoginForm() {
         {/* Tilbage-knappen som navigerer til /studentTeacher */}
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: '',}}>
           <Link to="/studentTeacher">
-            <Button size="lg" className='transparentBtn' onClick={() => context.navigate("/")}> 
-              <FontAwesomeIcon icon={faChevronLeft}/>  {/* Venstre pil ikon */}
+            <Button size="lg" className='transparentBtn'> 
+              <FontAwesomeIcon icon={faChevronLeft}/>  {/* Tilbage pil ikon */}
               Tilbage
             </Button>
           </Link>
@@ -84,17 +83,17 @@ export default function LoginForm() {
         <form onSubmit={handleLogin} id="login-form">
           {/* Email input felt */}
           <TextInput 
-            style={{color: "white"}}  // Hvid tekstfarve
+            style={{color: "white"}}
             label="Mail" 
-            description="Skriv din skolemail"  // Beskrivelse af feltet
+            description="Skriv din skolemail"
             placeholder="Mail" 
-            name="email"  // Navn på inputfeltet
-            withAsterisk  // Asterisk for obligatorisk felt
-            size="lg"  // Størrelse på inputfeltet
+            name="email" 
+            withAsterisk  // Stjerne for obligatorisk felt
+            size="lg"  
             styles={{
               description: {
-                color: 'white',  // Hvid farve på beskrivelsen
-              },
+                color: 'white',
+              }
             }}
           />
           {/* Fejlmeddelelse hvis email ikke er korrekt */}
@@ -102,17 +101,17 @@ export default function LoginForm() {
 
           {/* Password input felt */}
           <PasswordInput 
-            style={{padding: "40px 0px", color: "white"}}  // Hvid tekstfarve og padding for feltet
+            style={{paddingTop: "40px", color: "white"}}
             label="Password"
             description="Skriv dit password"
             placeholder="Password"
             name="password"
-            withAsterisk
+            withAsterisk // Stjerne for obligatorisk felt
             size="lg"
             styles={{
               description: {
-                color: 'white',  // Hvid farve på beskrivelsen
-              },
+                color: 'white',
+              }
             }}
           />
           {/* Fejlmeddelelse hvis password ikke er korrekt */}
@@ -120,7 +119,8 @@ export default function LoginForm() {
           
           {/* Log ind knap */}
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Button size="lg" className='greenBtn' onClick={handleLogin}>Log ind</Button>  {/* Knap til at sende login-anmodningen */}
+            {/* Knap til at sende login-anmodningen */}
+            <Button size="lg" className='greenBtn' onClick={handleLogin}>Log ind</Button>  
           </div>
         </form>
       </Container>

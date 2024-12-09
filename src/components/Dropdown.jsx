@@ -26,12 +26,13 @@ export default function Dropdown({ selectedRoom, setSelectedRoom }) {
     </Combobox.Option>
   ));
 
-  // Returnerer indholdet fra dropdown -----------------------christian
+  // Returnerer hele dropdown-komponenten
+  // Returnerer indholdet fra dropdown -----------------------mathias
   return (
     <Combobox
-      store={combobox}  // Binder Comboboxens tilstand til useCombobox hooken
+      store={combobox}  // Binder dropdownens tilstand til useCombobox (åben/lukket)
       withinPortal={false}  // Dropdown-menuen renderes indenfor komponenten
-      offset={0}  // Justerer placeringen af dropdownen
+      offset={0}  // Ingen ekstra plads mellem knappen og dropdown-menuen
       // Når en valgmulighed er valgt, opdateres den valgte værdi og dropdownen lukkes
       onOptionSubmit={(val) => {
         setSelectedRoom(val); // Opdaterer den valgte værdi

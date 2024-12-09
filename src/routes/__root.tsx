@@ -1,6 +1,6 @@
-import React from "react";  // Importerer React for at kunne bruge JSX
-import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";  // Importerer funktioner fra TanStack React Router
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";  // Importerer devtools til TanStack Router for at debugge ruter
+import React from "react";  
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";  
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";  
 
 // Interface for router context, som bruges til at gemme supabase-klienten
 export interface RouterContext extends Record<any, any> {

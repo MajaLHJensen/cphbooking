@@ -84,33 +84,34 @@ function FrontPageNavbar() {
 
   return (
     <nav style={styles.navbar}>
-        <div>
-            {/* Logo sektion */}
-            <img style={styles.logo} src="/cphbooking/img/cphlogo.webp" alt="Cphbusiness logo" />
-        </div>
+      <div>
+        {/* Logo sektion */}
+        <img style={styles.logo} src="/cphbooking/img/cphlogo.webp" alt="Cphbusiness logo" />
+      </div>
 
-        <div style={styles.rightSection}>
-            {/* Link til booking af lokale */}
-            <Link to={"/studentTeacher"} target="_blank">
-                <button
-                    style={styles.BookLokaleButton}
-                    onMouseEnter={() => setIsHovered(true)}  // Sætter hover state til true når musen er over knappen
-                    onMouseLeave={() => setIsHovered(false)}  // Sætter hover state til false når musen forlader knappen
-                >
-                    Book Lokale
-                </button>
-            </Link>
-            <div>
-                <span>Links</span>
-                <span style={styles.dropdownArrow}><FontAwesomeIcon icon={faChevronDown}/></span>
-            </div>
-            <div style={styles.separator}></div>
-            <button style={styles.mineFlowsButton}>Mine Flows</button>
+      <div style={styles.rightSection}>
+        {/* Link til booking af lokale */}
+          <Link to={"/studentTeacher"} target="_blank">
+            <button
+              style={styles.BookLokaleButton}
+              onMouseEnter={() => setIsHovered(true)}  // Sætter hover state til true når musen er over knappen
+              onMouseLeave={() => setIsHovered(false)}  // Sætter hover state til false når musen forlader knappen
+              >
+              Book Lokale
+            </button>
+          </Link>
+        <div>
+          <span>Links</span>
+          <span style={styles.dropdownArrow}><FontAwesomeIcon icon={faChevronDown}/></span>
+        </div>
+        {/* Streg mellem links og flows */}
+        <div style={styles.separator}></div>
+          <button style={styles.mineFlowsButton}>Mine Flows</button>
             <div style={styles.profileDropdown}>
-                <div style={styles.profileCircle}><FontAwesomeIcon icon={faUser}/></div>
+              <div style={styles.profileCircle}><FontAwesomeIcon icon={faUser}/></div>
                 <span style={styles.dropdownArrow}><FontAwesomeIcon icon={faChevronDown}/></span>
-            </div>
-            <div style={styles.icons}>
+              </div>
+              <div style={styles.icons}>
                 <span style={styles.icon}><FontAwesomeIcon icon={faComment}/></span>
                 <span style={styles.icon}><FontAwesomeIcon icon={faBell}/></span>
                 <span style={styles.icon}><FontAwesomeIcon icon={faMagnifyingGlass}/></span>

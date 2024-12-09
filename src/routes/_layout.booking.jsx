@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useRouteContext, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, useRouteContext, useNavigate } from '@tanstack/react-router'
 import NewCalendar from '../components/NewCalendar'
 import Schedule from '../components/Schedule'
 import { useEffect, useState } from 'react'
@@ -14,26 +14,29 @@ import '../components/BookingStyles.css'
 import { SUPABASE_URL, PUBLIC_ANON_KEY } from "../supabase/getSupabaseClient";
 import Spinner from '../components/Spinner'
 
-
+// Opretter en ny rute for bookingsiden
 export const Route = createFileRoute('/_layout/booking')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [datePicked, setDatePicked] = useState(dayjs())
-  const [bookings, setBookings] = useState({})
-  const [startTime, setStartTime] = useState('')
-  const [endTime, setEndTime] = useState('')
-  const [selectedRoom, setSelectedRoom] = useState('')
-  const [modalOpened, setModalOpened] = useState(false)
-  const [isLoading, setLoading] = useState(false)
-  const [bookingInfo, setBookingInfo] = useState(null)
-  const context = useRouteContext({ from: '/_layout/booking' })
-  const navigate = useNavigate({from: "/_layout/booking"}); 
-  console.log(context)
+  const [datePicked, setDatePicked] = useState(dayjs()); // Den aktuelt valgte dato
+  const [bookings, setBookings] = useState({}); // Aktuelle bookinger for valgte dato
+  const [startTime, setStartTime] = useState(''); // Starttidspunkt for booking
+  const [endTime, setEndTime] = useState(''); // Sluttidspunkt for booking
+  const [selectedRoom, setSelectedRoom] = useState(''); // Det valgte lokale
+  const [modalOpened, setModalOpened] = useState(false); // Om modalen er åben
+  const [isLoading, setLoading] = useState(false); // Indikator for, om der er en igangværende handling
+  const [bookingInfo, setBookingInfo] = useState(null); // Info om den aktuelle booking
 
+  const navigate = useNavigate(); 
+  const context = useRouteContext({ 
+    from: '/_layout/booking',
+  })
+  
+  // Henter bookinger for den valgte dato, når datoen ændres
   useEffect(() => {
-    getBookings()
+    getBookings() // Henter bookinger for den valgte dato
   }, [datePicked])
 
   async function getBookings() {
@@ -48,6 +51,7 @@ function RouteComponent() {
       },
     ).then((response) => response.json())
 
+    // Hvis der ingen bookinger er, oprettes tomme lister for hvert lokale
     if (data.length === 0) {
       setBookings({
         'Lokale 2.13 (4 pers.)': [],
@@ -57,13 +61,16 @@ function RouteComponent() {
         'Lokale 3.14 (6 pers.)': [],
       })
     } else {
+      // Kombiner eksisterende bookinger
       setBookings(combineSchedules(data))
     }
   }
 
+  // Funktion til at håndtere en ny booking
   async function makeBooking() {
     setLoading(true);
 
+    // Beregner bookingen for det valgte lokale og tidsinterval
     const data = calculateBooking(selectedRoom, startTime, endTime)
 
     // Konverterer den valgte dato (datePicked) til et JavaScript Date-objekt
@@ -79,8 +86,8 @@ function RouteComponent() {
     return; 
     }
 
-
     try {
+      // Tjekker for konflikter med eksisterende bookinger
       const existingBookingsResponse = await fetch(
         `${SUPABASE_URL}/rest/v1/bookings?booking_date=eq.${dayjs(datePicked).format('YYYY-MM-DD')}&select=*`,
         {
@@ -98,10 +105,11 @@ function RouteComponent() {
         )
       }
 
-      const existingBookings = await existingBookingsResponse.json()
+      const existingBookings = await existingBookingsResponse.json() 
 
+      // Tjekker for overlap mellem den nye booking og eksisterende bookinger
       const isConflict = existingBookings.some((booking) => {
-        const existingSchedule = booking.schedule[selectedRoom] || []
+        const existingSchedule = booking.schedule[selectedRoom] || [] // Henter eksisterende tidsrum for lokalet
         return data[selectedRoom].some((time) =>
           existingSchedule.includes(time),
         )
@@ -125,17 +133,18 @@ function RouteComponent() {
         selectedRoom: selectedRoom,
         email: context.userInfo?.email,
       })
-      setModalOpened(true)
+      // Åbner modal
+      setModalOpened(true) 
     } catch (error) {
       console.error('Fejl:', error)
       alert(`Fejl: ${error.message}`)
     }
   }
 
+  // Bekræfter og gemmer den nye booking i databasen
   async function confirmBooking() {
     console.log(bookingInfo)
     setLoading(true); 
-    // bookingInfo.email = "test@test.dk"; // dummy test data, slet denne linje igen.
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
         method: 'POST',
@@ -153,9 +162,10 @@ function RouteComponent() {
         throw new Error(`Fejl ved oprettelse af booking: ${response.status}`)
       }
 
+      // Lukker modal, nulstiller info og opdaterer bookings
       setModalOpened(false)
       setBookingInfo(null)
-      getBookings()
+      getBookings() 
     } catch (error) {
       console.error('Fejl:', error)
       // alert(`Fejl: ${error.message}`)
@@ -167,13 +177,16 @@ function RouteComponent() {
     console.log("Booking gennemført!");
   }
 
+  // Annullerer den aktuelle booking
   async function cancelBooking() {
-    setModalOpened(false)
-    setBookingInfo(null)
+    setModalOpened(false) // Lukker modal
+    setBookingInfo(null) // Nulstiller bookinginfo
   }
 
   return (
+    // Indhold på booking side
     <div className="container">
+      {/* Venstre side med kalender, dropdowns og knap */}
       <div className="leftSection">
         <NewCalendar date={datePicked} setDate={setDatePicked} />
         <div className="dropdownContainer">
@@ -181,27 +194,34 @@ function RouteComponent() {
           <StartDropdown startTime={startTime} setStartTime={setStartTime} />
           <EndDropdown endTime={endTime} setEndTime={setEndTime} />
         </div>
+        
+        {/* Hvis systemet er i gang med at hente data eller oprette en booking, vises en spinner */}
         {isLoading && <Spinner/>}
         
+        {/* Knap til at oprette en booking */}
         <div className="bookButtonContainer">
           <Button className="whiteBtn" onClick={makeBooking}>
             Book
           </Button>
         </div>
+        
+        {/* Modal der vises med bookingopsummering */}
         <Modal
-            opened={modalOpened}
-            onClose={() => setModalOpened(false)}
+            opened={modalOpened} // Kontrollerer om modalen er åben
+            onClose={() => setModalOpened(false)} // Lukker modalen når brugeren klikker på luk-knap
             centered
             withCloseButton={false}
             overlayProps={{ className: "modalOverlay" }}
             styles={{
               content: {
                 padding: "20px",
-               backgroundColor:"#6eb47e",
+                backgroundColor:"#6eb47e",
                 borderRadius: "8px",
               },
             }}
           >
+          
+          {/* Indhold af modalen */}
           <div className="modalInnerSection">
             <h3 className="modalSummary">Opsummering:</h3>
             <div className="modalSummaryContent">
@@ -219,17 +239,24 @@ function RouteComponent() {
               </p>
             </div>
           </div>
+
+          {/* Knapper i modalen til at annullere eller bekræfte bookingen */}
           <div className="modalButtonContainer">
             <Button className="greenBtn" onClick={cancelBooking}>
               Annuller
             </Button>
+
+            {/* Hvis systemet er i gang med at hente data eller oprette booking, vises en spinner */}
             {isLoading && <Spinner/>}
-              <Button className="greenBtn" onClick={confirmBooking}>
-                Bekræft
-              </Button>
+            
+            {/* Knap til at bekræfte booking */}
+            <Button className="greenBtn" onClick={confirmBooking}>
+              Bekræft
+            </Button>
           </div>
         </Modal>
       </div>
+      
       <div className="rightSection">
         <Schedule value={bookings} />
       </div>

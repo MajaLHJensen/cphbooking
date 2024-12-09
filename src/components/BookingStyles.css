@@ -1,4 +1,4 @@
-/* Kalender styling */
+/* Kalender og container styling, newCalender komponent */
 .calendar{
     border: 1px solid rgb(203, 202, 202);
     border-radius: 3px;
@@ -10,79 +10,83 @@
     gap: 2px;
   }
 
+/* Styling af alt indholdet der kommer ud */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  gap: 20px;
+}
 
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    gap: 20px;
-  }
+/* Venstre side, hvor du har din kalender, dropdowns og knap */
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Højre side, skema */
+.rightSection {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+
+/* Dropdown styling */
+.dropdownContainer {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
   
-  .leftSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
+/* Book knappen */
+.bookButtonContainer {
+  padding-left: 200px;
+}
   
-  .dropdownContainer {
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    width: 100%;
-    gap: 20px;
-  }
+/* Styling af modal */
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
   
-  .bookButtonContainer {
-    padding-left: 200px;
-  }
+.modalContent {
+  background-color: #6eb47e;
+  border-radius: 16px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+}
   
-  .modalOverlay {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+.modalInnerSection {
+  background-color: #83c993;
+  border-radius: 16px;
+  padding: 50px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+}
   
-  .modalContent {
-    background-color: #6eb47e;
-    border-radius: 16px;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 600px;
-  }
+.modalSummary {
+  margin-bottom: 20px;
+}
   
-  .modalInnerSection {
-    background-color: #83c993;
-    border-radius: 16px;
-    padding: 50px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: white;
-  }
+.modalSummaryContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
   
-  .modalSummary {
-    margin-bottom: 20px;
-  }
-  
-  .modalSummaryContent {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .modalButtonContainer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    gap: 10px;
-  }
-  
-  .rightSection {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 80vh;
-  }
-  
+.modalButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}

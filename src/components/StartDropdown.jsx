@@ -32,32 +32,36 @@ export default function StartDropdown({startTime, setStartTime}) {
   ));
 
   return (
+    // Dropdown-komponenten
     <Combobox
-      store={combobox}
-      withinPortal={false}
-      offset={0}
+      store={combobox} // Tilknyt dropdown-logikken
+      withinPortal={false} // Gør, at dropdownen vises tæt på knappen
+      offset={0} // Fjerner ekstra afstand mellem dropdownen og knappen
       onOptionSubmit={(val) => {
-        setStartTime(val);
-        combobox.closeDropdown();
+        setStartTime(val); // Gemmer det valgte tidspunkt
+        combobox.closeDropdown(); // Lukker dropdown-menuen
       }}
     >
+      {/* Knappen, som åbner dropdown-menuen */}
       <Combobox.Target>
         <InputBase
-          component="button"
+          component="button" 
           type="button"
-          pointer
-          label="Vælg startstidspunkt"
-          withAsterisk
-          rightSection={<Combobox.Chevron />}
-          onClick={() => combobox.toggleDropdown()}
-          rightSectionPointerEvents="none"
-          classNames={ classes.input }
+          label="Vælg startstidspunkt" 
+          withAsterisk // Tilføjer en lille stjerne for at vise, at det er vigtigt at vælge noget
+          rightSection={<Combobox.Chevron />} // Tilføjer en pil, som viser, at der er en dropdown
+          onClick={() => combobox.toggleDropdown()} // Åbner/lukker dropdownen, når du klikker
+          rightSectionPointerEvents="none" // Sørger for, at pilen ikke kan klikkes på
+          classNames={classes.input} 
         >
+          {/* Viser enten det valgte tidspunkt eller "Vælg startstidspunkt", hvis ingen tid er valgt */}
           {startTime || <Input.Placeholder>Vælg startstidspunkt</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 
+      {/* Dropdown-menuen, der viser tidspunkterne */}
       <Combobox.Dropdown className={classes.dropdown}>
+        {/* Viser listen af muligheder */}
         <Combobox.Options>{options}</Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>

@@ -1,4 +1,4 @@
-import { Loader } from '@mantine/core';  // Importerer Loader-komponenten fra Mantine
+import { Loader } from '@mantine/core'; 
 
 // Spinner-komponenten, der viser en loader (indlæsningsindikator)
 export default function Spinner() {
