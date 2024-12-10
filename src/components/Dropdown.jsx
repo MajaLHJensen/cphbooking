@@ -27,7 +27,6 @@ export default function Dropdown({ selectedRoom, setSelectedRoom }) {
   ));
 
   // Returnerer hele dropdown-komponenten
-  // Returnerer indholdet fra dropdown -----------------------mathias
   return (
     <Combobox
       store={combobox}  // Binder dropdownens tilstand til useCombobox (åben/lukket)
