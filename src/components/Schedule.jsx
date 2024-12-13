@@ -32,6 +32,12 @@ const Schedule = ({ value }) => {
       padding: "15px", 
       border: "1px solid #ddd", 
     },
+    roomColumn: {
+      backgroundColor: "#ffeb99",
+      fontWeight: "bold",        
+      padding: "10px",            
+      border: "1px solid #ddd",  
+    },
     td: {
       border: "1px solid #ddd", 
       padding: "3px", 
@@ -63,7 +69,7 @@ const Schedule = ({ value }) => {
           {Object.keys(value).map((room) => (
             <tr key={room}>
               {/* td er tabeldata */}
-              <td style={styles.td}>{room}</td> {/* Vist lokale navn i den første kolonne */}
+              <td style={styles.roomColumn}>{room}</td> {/* Vist lokale navn i den første kolonne */}
               {times.map((time) => (
                 // Mapper gennem 'times' og viser en celle for hvert tidsinterval
                 <td
