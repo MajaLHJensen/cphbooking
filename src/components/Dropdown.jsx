@@ -17,7 +17,7 @@ export default function Dropdown({ selectedRoom, setSelectedRoom }) {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  // Går igennem lokalerne til dropdown component og skaber en ny option
+  // Går igennem lokalerne til dropdown component og skaber en ny option(hvert enkelt valgmulighed)
   const options = lokaler.map((item) => (
     // V: Værdien, der bliver sendt, når brugeren vælger denne mulighed.
     // K: En unik nøgle, som React kræver for at optimere rendering af lister.

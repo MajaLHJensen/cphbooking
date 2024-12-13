@@ -41,6 +41,7 @@ export default function BookingOverview() {
     },
   };
 
+  // Opdatere når der sker handling
   // useEffect hook bruges til at kalde `viewBookings` en enkelt gang, når komponentet loader
   useEffect(() => { 
     viewBookings(); 
@@ -107,6 +108,7 @@ export default function BookingOverview() {
         <div>
           {/* Mapper gennem listen af bookings og genererer et "kort" for hver */}
           {bookings.map((booking) => (
+            // Key prop hjælper med at indentificere hvert element i listen
             <div key={booking.id} style={styles.bookingCard}>
               <div>
                 <p>
