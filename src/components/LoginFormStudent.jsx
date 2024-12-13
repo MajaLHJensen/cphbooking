@@ -51,7 +51,7 @@ export default function LoginForm() {
     console.log("login", data.user.email);  // Udskriver den indloggede brugers email
 
     context.setUserInfo({
-      
+       
       email: data.user.email,
     })  // Sætter brugerinfo i konteksten/opsumeringen
 
